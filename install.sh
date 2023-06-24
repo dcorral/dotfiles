@@ -8,6 +8,19 @@ CONFIG_DOT_DIR=$HOME/dotfiles/config
 DOT_DIR=$HOME/dotfiles
 FONTS_DIR=$HOME/dotfiles/fonts
 
+execute_extra=0
+while getopts "e" opt; do
+  case ${opt} in
+    e) 
+       execute_extra=1
+       ;;
+    \?)
+       echo "Invalid option: -$OPTARG" 1>&2
+       exit 1
+       ;;
+  esac
+done
+
 _exit_if_exists(){
 	local src=$1
 	if [ -d "$src" ]; then
@@ -137,7 +150,7 @@ p10k(){
 }
 
 extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin joplin --noconfirm
+    yay -S microsoft-edge-stable-bin ledger-live-bin --noconfirm
     sudo pacman -S telegram-desktop bitwarden --noconfirm
 }
 
@@ -157,7 +170,9 @@ main(){
     oh_my_tmux
     p10k
     yay_install
-    extra_packages
+    if [[ $execute_extra -eq 1 ]]; then
+        extra_packages
+    fi
     keyboardmap
 }
 
