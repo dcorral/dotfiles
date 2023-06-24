@@ -29,27 +29,10 @@ return require('packer').startup(function(use)
 		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
 		  -- Autocompletion
-		  {'L3MON4D3/LuaSnip'},     -- Required
-          use {
-              'hrsh7th/nvim-cmp',
-              config = function ()
-                  require'cmp'.setup {
-                      snippet = {
-                          expand = function(args)
-                              require'luasnip'.lsp_expand(args.body)
-                          end
-                      },
-
-                      sources = {
-                          { name = 'luasnip' },
-                          -- more sources
-                      },
-                  }
-              end
-          },
+		  {'hrsh7th/nvim-cmp'},     -- Required
 		  {'hrsh7th/cmp-nvim-lsp'}, -- Required
-          use { 'saadparwaiz1/cmp_luasnip' }
-      }
+		  {'L3MON4D3/LuaSnip'},     -- Required
+          }
   }
   use {
 	  "williamboman/mason.nvim",
