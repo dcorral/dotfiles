@@ -111,6 +111,8 @@ yay_install(){
     popd
     rm -fr yay
     popd
+    # Color
+    sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 }
 
 packer(){
