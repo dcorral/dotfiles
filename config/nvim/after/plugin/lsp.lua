@@ -16,8 +16,7 @@ lsp.ensure_installed({
 	'pylsp',
 	'emmet_ls',
 	'solc',
-	'solidity',
-    'javascript'
+	'solidity'
 })
 
 lsp.setup()
