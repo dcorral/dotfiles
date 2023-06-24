@@ -134,6 +134,16 @@ p10k(){
     ln -s -f $DOT_DIR/p10k.zsh $HOME/.p10k.zsh
 }
 
+extra_packages(){
+    yay -S microsoft-edge-stable-bin ledger-live-bin joplin --noconfirm
+    sudo pacman -S telegram-desktop bitwarden --noconfirm
+}
+
+keyboardmap(){
+    ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
+    ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
+}
+
 main(){
 	create_backup
 	pacman_install
@@ -145,7 +155,10 @@ main(){
     oh_my_tmux
     p10k
     yay_install
+    extra_packages
+    keyboardmap
 }
+
 main
 
 
