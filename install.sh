@@ -163,6 +163,11 @@ gtk2(){
     ln -s -f $DOT_DIR/gtkrc-2.0 $HOME/.gtkrc-2.0
 }
 
+i3lock(){
+    sudo ln -s -f $DOT_DIR/i3lock.service /etc/systemd/system/i3lock.service
+    sudo systemctl enable i3lock.service
+}
+
 main(){
 	create_backup
 	pacman_install
@@ -179,6 +184,7 @@ main(){
     fi
     keyboardmap
     gtk2
+    i3lock
 }
 
 main
