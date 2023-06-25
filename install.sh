@@ -82,7 +82,10 @@ config_link() {
 
     rm -fr $CONFIG_DIR
 
-	_link $src $dst
+	_link $src/nvim $dst
+	_link $src/i3 $dst
+	_link $src/alacritty $dst
+	_link $src/gtk-3.0 $dst
     i3 reload
 }
 
