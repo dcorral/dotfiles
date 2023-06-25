@@ -88,7 +88,7 @@ config_link() {
 
 pacman_install() {
 	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra --noconfirm
+	sudo pacman -S bat fzf unzip fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
 }
 
 nvm_node(){
