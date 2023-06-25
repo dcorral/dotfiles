@@ -159,7 +159,7 @@ p10k(){
 }
 
 extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin joplin-desktop noto-fonts-emoji-apple --noconfirm
+    yay -S microsoft-edge-stable-bin ledger-live-bin noto-fonts-emoji-apple --noconfirm
     sudo pacman -S telegram-desktop bitwarden --noconfirm
 }
 
