@@ -87,11 +87,11 @@ config_link() {
     rm -fr $CONFIG_DIR
 
     if [[ $install_nvim -eq 1 ]]; then
-        _link $src/nvim $dst
+        _link $src/nvim $dst/nvim
     fi
-	_link $src/i3 $dst
-	_link $src/alacritty $dst
-	_link $src/gtk-3.0 $dst
+	_link $src/i3 $dst/i3
+	_link $src/alacritty $dst/alacritty
+	_link $src/gtk-3.0 $dst/gtk-3.0
     i3 reload
 }
 
