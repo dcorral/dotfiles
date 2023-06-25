@@ -178,8 +178,6 @@ i3lock(){
 }
 
 main(){
-    echo $install_nvim
-    exit 1
 	create_backup
 	pacman_install
     nvm_node
