@@ -9,10 +9,14 @@ DOT_DIR=$HOME/dotfiles
 FONTS_DIR=$HOME/dotfiles/fonts
 
 execute_extra=0
-while getopts "e" opt; do
+install_nvim=1
+while getopts "e:n" opt; do
   case ${opt} in
     e) 
        execute_extra=1
+       ;;
+    n) 
+       install_nvim=0
        ;;
     \?)
        echo "Invalid option: -$OPTARG" 1>&2
@@ -82,7 +86,9 @@ config_link() {
 
     rm -fr $CONFIG_DIR
 
-	_link $src/nvim $dst
+    if [[ $install_nvim -eq 1 ]]; then
+        _link $src/nvim $dst
+    fi
 	_link $src/i3 $dst
 	_link $src/alacritty $dst
 	_link $src/gtk-3.0 $dst
@@ -91,7 +97,7 @@ config_link() {
 
 pacman_install() {
 	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip arandr fd ripgrep zsh alacritty neovim tmux font-manager noto-fonts-emoji-apple gnome-themes-extra pcmanfm --noconfirm
+	sudo pacman -S bat fzf unzip arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
 }
 
 nvm_node(){
@@ -153,7 +159,7 @@ p10k(){
 }
 
 extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin joplin-desktop --noconfirm
+    yay -S microsoft-edge-stable-bin ledger-live-bin joplin-desktop noto-fonts-emoji-apple --noconfirm
     sudo pacman -S telegram-desktop bitwarden --noconfirm
 }
 
@@ -175,7 +181,9 @@ main(){
 	create_backup
 	pacman_install
     nvm_node
-    packer
+    if [[ $install_nvim -eq 1 ]]; then
+        packer
+    fi
 	config_link
     fonts
 	shell_config
