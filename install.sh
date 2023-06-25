@@ -88,11 +88,11 @@ config_link() {
     mkdir $CONFIG_DIR
 
     if [[ $install_nvim -eq 1 ]]; then
-        ln -s $src/nvim $dst
+        ln -s $src/nvim $dst/nvim
     fi
-	ln -s $src/i3 $dst
-	ln -s $src/alacritty $dst
-	ln -s $src/gtk-3.0 $dst
+	ln -s $src/i3 $dst/i3
+	ln -s $src/alacritty $dst/alacritty
+	ln -s $src/gtk-3.0 $dst/gtk-3.0
     i3 reload
 }
 
