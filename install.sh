@@ -10,7 +10,7 @@ FONTS_DIR=$HOME/dotfiles/fonts
 
 execute_extra=0
 install_nvim=1
-while getopts "e:n" opt; do
+while getopts ":en" opt; do
   case ${opt} in
     e) 
        execute_extra=1
@@ -178,6 +178,8 @@ i3lock(){
 }
 
 main(){
+    echo $install_nvim
+    exit 1
 	create_backup
 	pacman_install
     nvm_node
