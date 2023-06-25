@@ -85,17 +85,14 @@ config_link() {
 	local dst=$CONFIG_DIR
 
     rm -fr $CONFIG_DIR
+    mkdir $CONFIG_DIR
 
     if [[ $install_nvim -eq 1 ]]; then
-        _mkdir $dst/nvim
-        _link $src/nvim $dst
+        ln -s $src/nvim $dst
     fi
-    _mkdir $dst/i3
-	_link $src/i3 $dst
-    _mkdir $dst/alacritty
-	_link $src/alacritty $dst
-    _mkdir $dst/gtk-3.0
-	_link $src/gtk-3.0 $dst
+	ln -s $src/i3 $dst
+	ln -s $src/alacritty $dst
+	ln -s $src/gtk-3.0 $dst
     i3 reload
 }
 
