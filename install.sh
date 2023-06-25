@@ -159,6 +159,10 @@ keyboardmap(){
     ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
 }
 
+gtk2(){
+    ln -s -f $DOT_DIR/gtkrc-2.0 $HOME/.gtkrc-2.0
+}
+
 main(){
 	create_backup
 	pacman_install
@@ -174,6 +178,7 @@ main(){
         extra_packages
     fi
     keyboardmap
+    gtk2
 }
 
 main
