@@ -88,7 +88,7 @@ config_link() {
 
 pacman_install() {
 	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
+	sudo pacman -S bat fzf unzip arandr fd ripgrep zsh alacritty neovim tmux font-manager noto-fonts-emoji-apple gnome-themes-extra pcmanfm --noconfirm
 }
 
 nvm_node(){
@@ -150,7 +150,7 @@ p10k(){
 }
 
 extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin --noconfirm
+    yay -S microsoft-edge-stable-bin ledger-live-bin joplin-desktop --noconfirm
     sudo pacman -S telegram-desktop bitwarden --noconfirm
 }
 
