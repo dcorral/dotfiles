@@ -1,3 +1,6 @@
-require("dcorral")
-vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
+require("core.base")
+require("core.custom")
+require("core.keymaps")
+require("core.plugins")
+require("core.plugins_conf")
+

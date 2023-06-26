@@ -25,83 +25,30 @@ while getopts ":en" opt; do
   esac
 done
 
-_exit_if_exists(){
-	local src=$1
-	if [ -d "$src" ]; then
-		echo "Dierectory $src exists."
-		return 1
-	fi
+base_packages() {
+	sudo pacman -Syy --noconfirm
+	sudo pacman -S bat fzf unzip viewnior scrot clang arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
+    _nvm
+    _yay
+    # Rust
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
 
-_exit_if_not_exists(){
-	local src=$1
-	if [ ! -d "$src" ]; then
-		echo "Directory $src does not exist"
-		return 1
-	fi
-}
-
-_mkdir() {
-	local src=$1
-	_exit_if_exists $src
-
-	mkdir -p $src
-	echo "Directory $src created"
-}
-
-_link(){
-	local src=$1
-	local dst=$2
-
-	_exit_if_not_exists $src
-
-	ln -s -f $src $dst
-	echo "Symbolic link $src -> $dst created"
-}
-
-create_backup(){
-	local src=$CONFIG_DIR
-	local dst=$BACKUP_DIR
-
-	_exit_if_exists $dst
-
-	_mkdir $dst
-	cp -R $src $dst
-	echo "Backup complete $src -> $dst"
-	rm -fr $src
-}
-
-restore_backup(){
-	local src=$BACKUP_DIR
-	local dst=$CONFIG_DIR
-
-	rm -fr $dst
-	cp -R $src $dst
-	echo "Backup restore complete $src -> $dst"
-}
-
-config_link() {
+config_dirs_link() {
 	local src=$CONFIG_DOT_DIR
 	local dst=$CONFIG_DIR
-
     rm -fr $CONFIG_DIR
     mkdir $CONFIG_DIR
-
-    if [[ $install_nvim -eq 1 ]]; then
-        ln -s $src/nvim $dst/nvim
-    fi
 	ln -s $src/i3 $dst/i3
 	ln -s $src/alacritty $dst/alacritty
 	ln -s $src/gtk-3.0 $dst/gtk-3.0
+    if [[ $install_nvim -eq 1 ]]; then
+        ln -s $src/nvim $dst/nvim
+    fi
     i3 reload
 }
 
-pacman_install() {
-	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
-}
-
-nvm_node(){
+_nvm(){
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     source $HOME/.bashrc
     export NVM_DIR="$HOME/.nvm"
@@ -110,22 +57,26 @@ nvm_node(){
     nvm install node --lts
 }
 
-shell_config(){
+terminal(){
+    # change shell
     sudo chsh -s $(which zsh) $(whoami)
+    # Set gobal env variables
     echo $'EDITOR=nvim\nTERMINAL=alacritty' | sudo tee -a /etc/environment
+    # OMZ
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     ln -s -f $DOT_DIR/zshrc $HOME/.zshrc
-}
-
-oh_my_tmux(){
+    # OMT
     pushd $HOME
     git clone https://github.com/gpakosz/.tmux.git
     ln -s -f .tmux/.tmux.conf
     cp .tmux/.tmux.conf.local .
     popd
+    # p10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    ln -s -f $DOT_DIR/p10k.zsh $HOME/.p10k.zsh
 }
 
-yay_install(){
+_yay(){
     pushd $HOME
     sudo pacman -S --needed base-devel
     git clone https://aur.archlinux.org/yay.git
@@ -138,35 +89,15 @@ yay_install(){
     sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 }
 
-packer(){
-    _mkdir $CONFIG_DIR/nvim/lua/dcorral
-    cp $CONFIG_DOT_DIR/nvim/lua/dcorral/packer.lua $CONFIG_DIR/nvim/lua/dcorral/packer.lua
-
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-        ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-    nvim --headless -c "source $CONFIG_DIR/nvim/lua/dcorral/packer.lua" -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-    nvim --headless -c "source $CONFIG_DIR/nvim/lua/dcorral/packer.lua" -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-}
-
 fonts(){
     font-manager -i $FONTS_DIR/*
+    yay -S noto-fonts-emoji-apple --noconfirm
     i3 reload
 }
 
-p10k(){
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    ln -s -f $DOT_DIR/p10k.zsh $HOME/.p10k.zsh
-}
-
-extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin noto-fonts-emoji-apple --noconfirm
-    sudo pacman -S telegram-desktop bitwarden --noconfirm
-}
-
-keyboardmap(){
-    ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
+keyboard(){
     ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
+    ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
 }
 
 gtk2(){
@@ -178,25 +109,27 @@ i3lock(){
     sudo systemctl enable i3lock.service
 }
 
+extra_conf(){
+    ln -s -f $DOT_DIR/clang-format $HOME/.clang-format
+}
+
+extra_packages(){
+    yay -S microsoft-edge-stable-bin ledger-live-bin --noconfirm
+    sudo pacman -S telegram-desktop bitwarden --noconfirm
+}
+
 main(){
-	create_backup
-	pacman_install
-    nvm_node
-    if [[ $install_nvim -eq 1 ]]; then
-        packer
-    fi
-	config_link
+	base_packages
     fonts
-	shell_config
-    oh_my_tmux
-    p10k
-    yay_install
+	config_dirs_link
+	terminal
+    keyboard
+    gtk2
+    i3lock
+    extra_conf
     if [[ $execute_extra -eq 1 ]]; then
         extra_packages
     fi
-    keyboardmap
-    gtk2
-    i3lock
 }
 
 main
