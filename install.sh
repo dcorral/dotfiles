@@ -8,12 +8,12 @@ CONFIG_DOT_DIR=$HOME/dotfiles/config
 DOT_DIR=$HOME/dotfiles
 FONTS_DIR=$HOME/dotfiles/fonts
 
-execute_extra=0
+install_extra_packages=1
 install_nvim=1
 while getopts ":en" opt; do
   case ${opt} in
     e) 
-       execute_extra=1
+       install_extra_packages=0
        ;;
     n) 
        install_nvim=0
@@ -25,13 +25,38 @@ while getopts ":en" opt; do
   esac
 done
 
+_yay(){
+    pushd $HOME
+    sudo pacman -S --needed base-devel
+    git clone https://aur.archlinux.org/yay.git
+    pushd yay
+    makepkg -si --noconfirm
+    popd
+    rm -fr yay
+    popd
+    # Color
+    sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
+}
+
+_nvm(){
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    source $HOME/.bashrc
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm install node --lts
+}
+
 base_packages() {
 	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip viewnior scrot clang arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm --noconfirm
+	sudo pacman -S bat fzf unzip viewnior\
+        scrot clang arandr fd ripgrep zsh alacritty\
+        neovim tmux font-manager gnome-themes-extra pcmanfm\
+        pavucontrol git-delta --noconfirm
     _nvm
     _yay
     # Rust
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 
 config_dirs_link() {
@@ -46,15 +71,6 @@ config_dirs_link() {
         ln -s $src/nvim $dst/nvim
     fi
     i3 reload
-}
-
-_nvm(){
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-    source $HOME/.bashrc
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm install node --lts
 }
 
 terminal(){
@@ -76,41 +92,24 @@ terminal(){
     ln -s -f $DOT_DIR/p10k.zsh $HOME/.p10k.zsh
 }
 
-_yay(){
-    pushd $HOME
-    sudo pacman -S --needed base-devel
-    git clone https://aur.archlinux.org/yay.git
-    pushd yay
-    makepkg -si --noconfirm
-    popd
-    rm -fr yay
-    popd
-    # Color
-    sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
-}
-
 fonts(){
     font-manager -i $FONTS_DIR/*
     yay -S noto-fonts-emoji-apple --noconfirm
     i3 reload
 }
 
-keyboard(){
-    ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
-    ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
-}
-
-gtk2(){
+extra_conf(){
     ln -s -f $DOT_DIR/gtkrc-2.0 $HOME/.gtkrc-2.0
-}
-
-i3lock(){
+    # i3 lock service
     sudo ln -s -f $DOT_DIR/i3lock.service /etc/systemd/system/i3lock.service
     sudo systemctl enable i3lock.service
-}
-
-extra_conf(){
+    # clang-format 2-4 spaces indent
     ln -s -f $DOT_DIR/clang-format $HOME/.clang-format
+    # gitconfig
+    sudo ln -s -f $DOT_DIR/gitconfig $HOME/.gitconfig
+    # keyboard win-alt on mechanical
+    ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
+    ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
 }
 
 extra_packages(){
@@ -123,11 +122,8 @@ main(){
     fonts
 	config_dirs_link
 	terminal
-    keyboard
-    gtk2
-    i3lock
     extra_conf
-    if [[ $execute_extra -eq 1 ]]; then
+    if [[ $install_extra_packages -eq 1 ]]; then
         extra_packages
     fi
 }

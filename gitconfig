@@ -1,0 +1,21 @@
+[user]
+	email = hi@dcorral.com
+	name = dcorral
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	syntax-theme = gruvbox-dark
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
