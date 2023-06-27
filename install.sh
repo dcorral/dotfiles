@@ -52,11 +52,12 @@ base_packages() {
 	sudo pacman -S bat fzf unzip viewnior\
         scrot clang arandr fd ripgrep zsh alacritty\
         neovim tmux font-manager gnome-themes-extra pcmanfm\
-        pavucontrol xorg-xkill git-delta --noconfirm
+        pavucontrol xclip xorg-xkill git-delta --noconfirm
     _nvm
     _yay
     # Rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    yay -S i3-scrot
 }
 
 config_dirs_link() {
@@ -70,6 +71,7 @@ config_dirs_link() {
     if [[ $install_nvim -eq 1 ]]; then
         ln -s $src/nvim $dst/nvim
     fi
+	ln -s -f $src/i3-scrot.conf $dst/i3-scrot.conf
     i3 reload
 }
 

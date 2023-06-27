@@ -2,7 +2,7 @@ set $mod Mod1
 font pango:Robot 10
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
-exec --no-startup-id "xkbcomp ~/.Xkeymap $DISPLAY"
+exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -108,3 +108,6 @@ client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 client.urgent           $red $red $white $red $red
 
 focus_follows_mouse no
+bindsym $mod+Control+s --release exec --no-startup-id i3-scrot -sc
+bindsym $mod+Shift+s --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Control+r exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
