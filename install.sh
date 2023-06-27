@@ -12,10 +12,10 @@ install_extra_packages=1
 install_nvim=1
 while getopts ":en" opt; do
   case ${opt} in
-    e) 
+    e)
        install_extra_packages=0
        ;;
-    n) 
+    n)
        install_nvim=0
        ;;
     \?)
@@ -52,7 +52,7 @@ base_packages() {
 	sudo pacman -S bat fzf unzip viewnior\
         scrot clang arandr fd ripgrep zsh alacritty\
         neovim tmux font-manager gnome-themes-extra pcmanfm\
-        pavucontrol git-delta --noconfirm
+        pavucontrol xorg-xkill git-delta --noconfirm
     _nvm
     _yay
     # Rust
@@ -110,7 +110,7 @@ extra_conf(){
     # keyboard win-alt on mechanical
     ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
     ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
-    # Arandr configs 
+    # Arandr configs
     ln -s -f $DOT_DIR/screenlayout $HOME/.screenlayout
 }
 

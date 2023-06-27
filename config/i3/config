@@ -1,7 +1,6 @@
 set $mod Mod1
 font pango:Robot 10
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id "xkbcomp ~/.Xkeymap $DISPLAY"
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -12,7 +11,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 tiling_drag modifier titlebar
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+bindsym --release $mod+Shift+q exec --no-startup-id xkill
 bindsym $mod+d exec --no-startup-id dmenu_run
 # change focus
 bindsym $mod+h focus left
@@ -79,7 +79,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#THEME 
+#THEME
 set $bg #282828
 set $red #cc241d
 set $green #98971a
