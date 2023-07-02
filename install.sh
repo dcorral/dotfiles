@@ -52,12 +52,14 @@ base_packages() {
 	sudo pacman -S bat fzf unzip viewnior\
         scrot clang arandr fd ripgrep zsh alacritty\
         neovim tmux font-manager gnome-themes-extra pcmanfm\
-        pavucontrol xclip xorg-xkill git-delta --noconfirm
+        pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill\
+        git-delta --noconfirm
     _nvm
     _yay
     # Rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     yay -S i3-scrot
+    sudo systemctl enable bluetooth.service
 }
 
 config_dirs_link() {
