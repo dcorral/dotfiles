@@ -58,7 +58,7 @@ base_packages() {
     _yay
     # Rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    yay -S i3-scrot
+    yay -S i3-scrot --noconfirm
     sudo systemctl enable bluetooth.service
 }
 
