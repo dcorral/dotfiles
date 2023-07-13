@@ -1,5 +1,5 @@
 local buildin = require("mason").setup()
-require("mason-lspconfig").setup{
+require("mason-lspconfig").setup {
     ensure_installed = {
         "lua_ls",
         "rust_analyzer",
@@ -13,7 +13,6 @@ require("mason-lspconfig").setup{
         "jsonls",
         "pylsp",
         "pyright",
-        "solc",
         "solidity",
         "sqlls",
         "tsserver",
@@ -26,9 +25,23 @@ require("mason-lspconfig").setup{
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require("mason-lspconfig").setup_handlers {
-    function (server_name)
+    function(server_name)
         require("lspconfig")[server_name].setup {
             capabilities = capabilities
         }
+        require("lspconfig")['emmet_ls'].setup({
+            -- on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte",
+                "pug", "typescriptreact", "vue" },
+            init_options = {
+                html = {
+                    options = {
+                        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+                        ["bem.enabled"] = true,
+                    },
+                },
+            }
+        })
     end,
 }
