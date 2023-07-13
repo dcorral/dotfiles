@@ -37,6 +37,7 @@ local plugins = {
             'saadparwaiz1/cmp_luasnip'
         }
     },
+    { "rafamadriz/friendly-snippets" },
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
