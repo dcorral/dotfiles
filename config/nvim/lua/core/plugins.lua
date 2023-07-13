@@ -23,7 +23,7 @@ local plugins = {
     'preservim/nerdcommenter',
     'tpope/vim-fugitive',
     -- LSP
-    { 'williamboman/mason.nvim', build = ':MasonUpdate' },
+    { 'williamboman/mason.nvim',     build = ':MasonUpdate' },
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     -- CPM
@@ -42,6 +42,11 @@ local plugins = {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {}
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
     }
 }
 
