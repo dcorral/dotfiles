@@ -1,4 +1,20 @@
 vim.g.mapleader = ' '
+vim.g.coc_global_extensions = {
+    "coc-css",
+    "coc-tsserver",
+    "coc-clangd",
+    "coc-html",
+    "coc-solidity",
+    "coc-snippets",
+    "coc-rust-analyzer",
+    "coc-pyright",
+    "coc-highlight",
+    "coc-lists",
+    "coc-emmet",
+    "coc-tslint",
+    "coc-eslint",
+    "coc-lua"
+}
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

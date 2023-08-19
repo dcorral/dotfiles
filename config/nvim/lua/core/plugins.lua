@@ -22,22 +22,6 @@ local plugins = {
     'mbbill/undotree',
     'preservim/nerdcommenter',
     'tpope/vim-fugitive',
-    -- LSP
-    { 'williamboman/mason.nvim',     build = ':MasonUpdate' },
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
-    -- CPM
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip'
-        }
-    },
-    { "rafamadriz/friendly-snippets" },
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -47,6 +31,11 @@ local plugins = {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         opts = {} -- this is equalent to setup({}) function
+    },
+    {
+        'neoclide/coc.nvim',
+        branch = "master",
+        build = "yarn install --frozen-lockfile"
     }
 }
 
