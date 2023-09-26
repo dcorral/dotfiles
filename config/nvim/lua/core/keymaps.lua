@@ -18,6 +18,8 @@ vim.keymap.set("n", "<leader><leader>", function()
 end)
 vim.keymap.set("n", "<leader>gy", ":.GBrowse!<CR>")
 vim.keymap.set("x", "<leader>gy", ":'<'>GBrowse!<CR>")
+vim.keymap.set('n', '<C-w>o', [[<Cmd>lua toggle_zoom()<CR>]], { noremap = true, silent = true })
+
 
 -- LSP
 vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
@@ -43,3 +45,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+vim.keymap.set('n', '<leader>h', '<cmd>AerialToggle<CR>')
