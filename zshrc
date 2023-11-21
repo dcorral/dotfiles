@@ -41,4 +41,4 @@ eval "$(pyenv init -)"
 
 export BROWSER="/usr/bin/microsoft-edge-stable"
 
-alias prune-docker='docker prune images && docker image prune && docker image prune -a && docker container prune && docker volume prune'
+alias prune-docker='docker image prune && docker image prune -a && docker container prune && docker volume prune'
