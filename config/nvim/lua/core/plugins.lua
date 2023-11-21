@@ -16,12 +16,13 @@ local plugins = {
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
+        tag = '0.1.3',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     'mbbill/undotree',
     'preservim/nerdcommenter',
     'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
     -- LSP
     { 'williamboman/mason.nvim',     build = ':MasonUpdate' },
     'williamboman/mason-lspconfig.nvim',
