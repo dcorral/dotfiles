@@ -60,3 +60,28 @@ function toggle_zoom()
     end
   end
 end
+
+local function replace_with_clipboard()
+    -- Check if we're in visual mode and get the visual selection if so
+    local mode = vim.fn.mode()
+    local isVisual = mode == 'v' or mode == 'V' or mode == ''
+
+    -- Temporarily allow modifications to the buffer
+    vim.api.nvim_buf_set_option(0, 'modifiable', true)
+
+    if isVisual then
+        vim.cmd([[normal!  "_d]])
+        vim.cmd([[normal! "+P]])     -- Paste the clipboard content
+    else
+        -- Replace the entire buffer content for non-visual modes
+        vim.cmd([[%delete _]])     -- Delete all lines, storing them in the black hole register
+        vim.cmd([[normal! "+P]])     -- Paste the clipboard content
+    end
+
+end
+
+-- Map the function to <leader>m in normal and visual mode
+vim.keymap.set('n', '<leader>m', replace_with_clipboard, { noremap = true, silent = true })
+vim.keymap.set('x', '<leader>m', replace_with_clipboard, { noremap = true, silent = true })
+
+
