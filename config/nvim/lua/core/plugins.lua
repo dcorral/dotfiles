@@ -62,6 +62,10 @@ local plugins = {
     {
         'ggandor/leap.nvim',
         opts = {},
+    },
+    {
+        'elihunter173/dirbuf.nvim',
+        opts = {},
     }
 }
 
