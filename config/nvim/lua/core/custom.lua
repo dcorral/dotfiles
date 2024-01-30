@@ -83,5 +83,7 @@ end
 -- Map the function to <leader>m in normal and visual mode
 vim.keymap.set('n', '<leader>m', replace_with_clipboard, { noremap = true, silent = true })
 vim.keymap.set('x', '<leader>m', replace_with_clipboard, { noremap = true, silent = true })
-
+vim.keymap.set('n', '<leader>M', function()
+    vim.cmd('%yank +')
+end, { noremap = true, silent = true, desc = "Copy entire buffer to system clipboard" })
 
