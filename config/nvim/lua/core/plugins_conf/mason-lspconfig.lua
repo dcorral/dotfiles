@@ -23,6 +23,12 @@ require("mason-lspconfig").setup {
     handlers = nil,
 }
 
+local on_attach = function(client, bufnr)
+    if client.name == "solidity" then
+        client.server_capabilities.renameProvider = false
+    end
+end
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require("mason-lspconfig").setup_handlers {
     function(server_name)
@@ -31,7 +37,6 @@ require("mason-lspconfig").setup_handlers {
         }
         require("lspconfig")['emmet_ls'].setup({
             -- on_attach = on_attach,
-            capabilities = capabilities,
             filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte",
                 "pug", "typescriptreact", "vue" },
             init_options = {
@@ -44,6 +49,7 @@ require("mason-lspconfig").setup_handlers {
             }
         })
         require("lspconfig")['solidity'].setup({
+            on_attach = on_attach,
             cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
             filetypes = { 'solidity' },
             root_dir = require("lspconfig.util").find_git_ancestor,
