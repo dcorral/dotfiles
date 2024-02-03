@@ -6,7 +6,7 @@ Before=sleep.target
 User=dcorral
 Type=forking
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/i3lock
+ExecStart=/usr/bin/i3lockmore --image-fill /home/dcorral/Pictures/wallpaper.png -u --pointer=win
 
 [Install]
 WantedBy=suspend.target
