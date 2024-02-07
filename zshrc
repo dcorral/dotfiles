@@ -9,7 +9,7 @@ export EDITOR=vim
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git fzf)
+plugins=(git fzf zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt autocd
