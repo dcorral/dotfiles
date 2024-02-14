@@ -42,6 +42,9 @@ eval "$(pyenv init -)"
 export BROWSER="/usr/bin/microsoft-edge-stable"
 
 alias prune-docker='docker image prune && docker image prune -a && docker container prune && docker volume prune'
+alias f='forge'
 
 [[ -z "$TMUX" ]] && exec tmux
 
+autoload -U compinit
+compinit -i
