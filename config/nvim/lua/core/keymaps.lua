@@ -11,7 +11,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "Q", "<nop>")
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
@@ -22,6 +21,24 @@ vim.keymap.set('n', '<C-w>o', [[<Cmd>lua toggle_zoom()<CR>]], { noremap = true, 
 
 
 -- LSP
+local opts = { noremap = true, silent = true }
+local function format()
+    if vim.bo.filetype == "solidity" then
+        -- Save the current cursor position
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+        -- Run 'forge fmt' silently and reload the buffer without prompting
+        vim.cmd("silent !forge fmt %")
+        vim.cmd('edit!') -- Force reload of the buffer
+        -- Restore the cursor position
+        vim.api.nvim_win_set_cursor(0, cursor_pos)
+    else
+        -- Use LSP formatting for other filetypes
+        vim.lsp.buf.format({ async = true })
+    end
+end
+-- Function to format using LSP or forge fmt for Solidity
+vim.keymap.set('n', '<space>f', format, opts)
+
 vim.keymap.set('n', '<space>d', vim.diagnostic.open_float)
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -37,12 +54,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', function()
             vim.cmd("Telescope lsp_references")
+            print('a')
         end, opts)
         -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<space>f', function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
+        -- vim.keymap.set('n', '<space>f', function()
+        --     vim.lsp.buf.format { async = true }
+        -- end, opts)
     end,
 })
 
+
+-- AERIAL
 vim.keymap.set('n', '<leader>h', '<cmd>AerialToggle<CR>')

@@ -86,4 +86,3 @@ vim.keymap.set('x', '<leader>m', replace_with_clipboard, { noremap = true, silen
 vim.keymap.set('n', '<leader>M', function()
     vim.cmd('%yank +')
 end, { noremap = true, silent = true, desc = "Copy entire buffer to system clipboard" })
-
