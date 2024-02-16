@@ -54,7 +54,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set('n', 'gr', function()
             vim.cmd("Telescope lsp_references")
-            print('a')
         end, opts)
         -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
         -- vim.keymap.set('n', '<space>f', function()
@@ -62,7 +61,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- end, opts)
     end,
 })
-
 
 -- AERIAL
 vim.keymap.set('n', '<leader>h', '<cmd>AerialToggle<CR>')
