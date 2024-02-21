@@ -27,6 +27,7 @@ local function format()
         -- Save the current cursor position
         local cursor_pos = vim.api.nvim_win_get_cursor(0)
         -- Run 'forge fmt' silently and reload the buffer without prompting
+        vim.cmd("update")
         vim.cmd("silent !forge fmt %")
         vim.cmd('edit!') -- Force reload of the buffer
         -- Restore the cursor position
