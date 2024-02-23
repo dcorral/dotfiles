@@ -9,7 +9,12 @@ export EDITOR=vim
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git fzf zsh-syntax-highlighting)
+plugins=(
+    git
+    fzf
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt autocd
@@ -38,6 +43,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+eval $(thefuck --alias)
 
 export BROWSER="/usr/bin/microsoft-edge-stable"
 
