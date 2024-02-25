@@ -22,3 +22,11 @@
 	colorMoved = default
 [init]
 	defaultBranch = main
+[branch]
+	sort = -committerdate
+[alias]
+	fpush = push
+	staash = stash --all
+[maintenance]
+	repo = /home/dcorral/workspace/CV-SCs
+	repo = /home/dcorral/workspace/CV-frontend
