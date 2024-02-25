@@ -27,6 +27,7 @@
 [alias]
 	fpush = push
 	staash = stash --all
+    bb = !$DOTFILES/utils/better-branch.sh
 [maintenance]
 	repo = /home/dcorral/workspace/CV-SCs
 	repo = /home/dcorral/workspace/CV-frontend

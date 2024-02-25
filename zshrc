@@ -6,6 +6,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 export TERMINAL=alacritty
 export EDITOR=vim
+export DOTFILES="$HOME/dotfiles/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
