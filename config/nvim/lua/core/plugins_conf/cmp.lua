@@ -3,13 +3,24 @@ local luasnip = require('luasnip')
 
 -- html snippets in javascript and javascriptreact
 luasnip.snippets = {
-  html = {}
+    html = {},
+    solidity = {
+        luasnip.parser.parse_snippet("fndesc", [[
+/**
+ * @dev ${1:Developer description}
+ *
+ * @param ${2:Param1}
+ * @param ${3:Param2}
+ * @return ${5:Return}
+ */
+]]),
+    }
 }
 luasnip.snippets.javascript = luasnip.snippets.html
 luasnip.snippets.javascriptreact = luasnip.snippets.html
 luasnip.snippets.typescriptreact = luasnip.snippets.html
 
-require("luasnip/loaders/from_vscode").load({include = {"html"}})
+require("luasnip/loaders/from_vscode").load({ include = { "html" } })
 require("luasnip/loaders/from_vscode").lazy_load()
 require('luasnip').filetype_extend("javascriptreact", { "html" })
 
@@ -18,8 +29,8 @@ local select_opts = { behavior = cmp.SelectBehavior.Replace }
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
 )
 
 cmp.setup({

@@ -55,3 +55,5 @@ alias f='forge'
 
 autoload -U compinit
 compinit -i
+
+export PATH="$PATH:/home/dcorral/.huff/bin"
