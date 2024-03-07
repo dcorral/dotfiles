@@ -1,8 +1,9 @@
-set $mod Mod1
+set $mod Mod4
 font pango:Robot 10
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id setxkbmap -layout us,es -option 'grp:alt_shift_toggle'
 exec --no-startup-id nm-applet
-exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
+# exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -110,7 +111,7 @@ client.urgent           $red $red $white $red $red
 focus_follows_mouse no
 bindsym $mod+Control+s --release exec --no-startup-id i3-scrot -sc
 bindsym $mod+Shift+s --release exec --no-startup-id i3-scrot -s
-bindsym $mod+Control+r exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
+# bindsym $mod+Control+r exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
 bindsym $mod+Control+0 exec --no-startup-id "systemctl suspend"
 
 

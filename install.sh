@@ -112,7 +112,7 @@ extra_conf(){
     # gitconfig
     sudo ln -s -f $DOT_DIR/gitconfig $HOME/.gitconfig
     # keyboard win-alt on mechanical
-    ln -s -f $DOT_DIR/Xkeymap $HOME/.Xkeymap
+    ln -s -f $DOT_DIR/Xmodmap $HOME/.Xmodmap
     ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
     # Arandr configs
     ln -s -f $DOT_DIR/screenlayout $HOME/.screenlayout
