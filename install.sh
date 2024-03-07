@@ -26,6 +26,11 @@ while getopts ":en" opt; do
 done
 
 _yay(){
+    if command -v yay &> /dev/null; then
+        echo "'yay' is installed, exiting the function."
+        return 0
+    fi
+
     pushd $HOME
     sudo pacman -S --needed base-devel
     git clone https://aur.archlinux.org/yay.git
@@ -39,6 +44,10 @@ _yay(){
 }
 
 _nvm(){
+    if command -v nvm &> /dev/null; then
+        echo "'nvm' is installed, exiting the function."
+        return 0  # Exit the function and continue with the rest of the script
+    fi
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     source $HOME/.bashrc
     export NVM_DIR="$HOME/.nvm"
@@ -51,15 +60,22 @@ base_packages() {
 	sudo pacman -Syy --noconfirm
 	sudo pacman -S bat fzf unzip viewnior\
         scrot clang arandr fd ripgrep zsh alacritty\
-        neovim tmux font-manager gnome-themes-extra pcmanfm\
+        neovim tmux zoxide thefuck font-manager gnome-themes-extra pcmanfm\
         pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill\
         git-delta --noconfirm
     _nvm
     _yay
-    # Rust
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    _rustup
     yay -S i3-scrot --noconfirm
     sudo systemctl enable bluetooth.service
+}
+
+_rustup() {
+    if command -v rustup &> /dev/null; then
+        echo "'rustup' is installed, exiting the function."
+        return 0
+    fi
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 
 config_dirs_link() {
@@ -98,7 +114,7 @@ terminal(){
 
 fonts(){
     font-manager -i $FONTS_DIR/*
-    yay -S noto-fonts-emoji-apple --noconfirm
+    yay -S noto-fonts-emoji --noconfirm
     i3 reload
 }
 
@@ -116,11 +132,15 @@ extra_conf(){
     ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
     # Arandr configs
     ln -s -f $DOT_DIR/screenlayout $HOME/.screenlayout
+    # OMZ plugins
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/dcorral/gitclone-autocomplete-omzsh-plugin ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/gitclone-autocomplete
 }
 
 extra_packages(){
-    yay -S microsoft-edge-stable-bin ledger-live-bin --noconfirm
-    sudo pacman -S telegram-desktop bitwarden --noconfirm
+    yay -S microsoft-edge-stable-bin --noconfirm
+    sudo pacman -S telegram-desktop --noconfirm
 }
 
 main(){
