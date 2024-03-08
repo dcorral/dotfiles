@@ -21,6 +21,7 @@ local plugins = {
     },
     'mbbill/undotree',
     'preservim/nerdcommenter',
+    'dcorral/svgpreview-vim',
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     -- LSP
