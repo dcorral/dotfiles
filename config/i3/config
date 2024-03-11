@@ -115,6 +115,7 @@ bindsym $mod+Shift+s --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Control+0 exec --no-startup-id "systemctl suspend"
 
 
-assign [class="Telegram"] $ws3
 assign [class="Microsoft"] $ws2
-assign [class="Spotify"] $ws4
+assign [class="Notion"] $ws3
+assign [class="Spotify"] $ws5
+assign [class="Telegram"] $ws4
