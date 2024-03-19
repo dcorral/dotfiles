@@ -116,6 +116,8 @@ extra_conf(){
     ln -s -f $DOT_DIR/xinitrc $HOME/.xinitrc
     # Arandr configs
     ln -s -f $DOT_DIR/screenlayout $HOME/.screenlayout
+    # Utils custom commands
+    ln -s $DOT_DIR/utils/run_loop.sh /usr/local/bin/run_loop
 }
 
 extra_packages(){
