@@ -25,9 +25,11 @@ local plugins = {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     -- LSP
-    { 'williamboman/mason.nvim',     build = ':MasonUpdate' },
+    { 'williamboman/mason.nvim', build = ':MasonUpdate' },
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
+    -- Formatter
+    { 'stevearc/conform.nvim', event = { "BufReadPre", "BufNewFile" }},
     -- CPM
     {
         'hrsh7th/nvim-cmp',
