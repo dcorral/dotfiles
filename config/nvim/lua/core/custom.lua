@@ -44,21 +44,21 @@ vim.diagnostic.config({
 local session_file_path = "/tmp/nvim_session.vim"
 
 function toggle_zoom()
-  local current_win = vim.api.nvim_get_current_win()
-  local all_wins = vim.api.nvim_list_wins()
+    local current_win = vim.api.nvim_get_current_win()
+    local all_wins = vim.api.nvim_list_wins()
 
-  if #all_wins > 1 then
-    -- Save the current session if more than one window is open
-    vim.cmd("mksession! " .. session_file_path)
+    if #all_wins > 1 then
+        -- Save the current session if more than one window is open
+        vim.cmd("mksession! " .. session_file_path)
 
-    -- Make the current window the only one on the screen
-    vim.cmd("only")
-  else
-    -- If there is only one window, try restoring the session
-    if vim.fn.filereadable(session_file_path) == 1 then
-      vim.cmd("source " .. session_file_path)
+        -- Make the current window the only one on the screen
+        vim.cmd("only")
+    else
+        -- If there is only one window, try restoring the session
+        if vim.fn.filereadable(session_file_path) == 1 then
+            vim.cmd("source " .. session_file_path)
+        end
     end
-  end
 end
 
 local function replace_with_clipboard()
@@ -71,13 +71,12 @@ local function replace_with_clipboard()
 
     if isVisual then
         vim.cmd([[normal!  "_d]])
-        vim.cmd([[normal! "+P]])     -- Paste the clipboard content
+        vim.cmd([[normal! "+P]]) -- Paste the clipboard content
     else
         -- Replace the entire buffer content for non-visual modes
-        vim.cmd([[%delete _]])     -- Delete all lines, storing them in the black hole register
-        vim.cmd([[normal! "+P]])     -- Paste the clipboard content
+        vim.cmd([[%delete _]])   -- Delete all lines, storing them in the black hole register
+        vim.cmd([[normal! "+P]]) -- Paste the clipboard content
     end
-
 end
 
 -- Map the function to <leader>m in normal and visual mode
@@ -86,3 +85,10 @@ vim.keymap.set('x', '<leader>m', replace_with_clipboard, { noremap = true, silen
 vim.keymap.set('n', '<leader>M', function()
     vim.cmd('%yank +')
 end, { noremap = true, silent = true, desc = "Copy entire buffer to system clipboard" })
+
+vim.api.nvim_create_augroup("JSRelatedIndent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "javascript.jsx", "javascriptreact", "typescript", "typescriptreact", "mjs" },
+    group = "JSRelatedIndent",
+    command = "setlocal shiftwidth=2 tabstop=2",
+})
