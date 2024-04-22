@@ -37,6 +37,7 @@ local function format()
         vim.lsp.buf.format({ async = true })
     end
 end
+vim.keymap.set('n', '<space>t', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>')
 -- Function to format using LSP or forge fmt for Solidity
 vim.keymap.set('n', '<space>f', format, opts)
 

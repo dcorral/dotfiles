@@ -15,6 +15,7 @@ plugins=(
     fzf
     zsh-syntax-highlighting
     zsh-autosuggestions
+    rust
 )
 
 source $ZSH/oh-my-zsh.sh
