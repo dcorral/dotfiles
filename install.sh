@@ -70,6 +70,7 @@ config_dirs_link() {
 	ln -s $src/i3 $dst/i3
 	ln -s $src/alacritty $dst/alacritty
 	ln -s $src/gtk-3.0 $dst/gtk-3.0
+	ln -s $src/i3status $dst/i3status
     if [[ $install_nvim -eq 1 ]]; then
         ln -s $src/nvim $dst/nvim
     fi
