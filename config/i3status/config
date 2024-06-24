@@ -14,7 +14,7 @@ general {
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
-order += "battery all"
+# order += "battery all"
 order += "disk /"
 order += "load"
 order += "memory"
@@ -50,10 +50,10 @@ memory {
 }
 
 tztime local {
-        format = "%d-%m %H:%M:%S"
+        format = "%d-%m %H:%M"
 }
 
 tztime sg {
-    format = "%H:%M:%S"
+    format = "%H:%M"
     timezone = "Asia/Singapore"
 }
