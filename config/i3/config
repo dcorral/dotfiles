@@ -3,6 +3,7 @@ font pango:Robot 10
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id setxkbmap -layout us,es -option 'grp:alt_shift_toggle'
 exec --no-startup-id nm-applet
+exec --no-startup-id pa-applet
 # exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
