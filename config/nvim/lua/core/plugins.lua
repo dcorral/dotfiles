@@ -29,7 +29,7 @@ local plugins = {
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     -- Formatter
-    { 'stevearc/conform.nvim', event = { "BufReadPre", "BufNewFile" }},
+    { 'stevearc/conform.nvim',   event = { "BufReadPre", "BufNewFile" } },
     -- CPM
     {
         'hrsh7th/nvim-cmp',
@@ -64,6 +64,11 @@ local plugins = {
     {
         'elihunter173/dirbuf.nvim',
         opts = {},
+    },
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
     }
 }
 

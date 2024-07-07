@@ -7,6 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export TERMINAL=alacritty
 export EDITOR=vim
 export DOTFILES="$HOME/dotfiles/"
+export BINFILES="$HOME/bin/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -34,7 +35,7 @@ alias cd='z'
 eval "$(zoxide init zsh)"
 
 # pnpm
-export PNPM_HOME="/home/dcorral/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -42,20 +43,19 @@ esac
 # pnpm end
 
 export PATH="$HOME/.local/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval $(thefuck --alias)
 
 export BROWSER="/usr/bin/microsoft-edge-stable"
 
 alias prune-docker='docker image prune && docker image prune -a && docker container prune && docker volume prune'
 alias f='forge'
+alias dc='docker-compose'
+alias server='ssh server-online'
 
 [[ -z "$TMUX" ]] && exec tmux
 
 autoload -U compinit
 compinit -i
 
-export PATH="$PATH:/home/dcorral/.huff/bin"
+export PATH="$PATH:$HOME/.huff/bin"
+export PATH="$PATH:$BINFILES"
 
