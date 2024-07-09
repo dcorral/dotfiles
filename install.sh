@@ -8,6 +8,7 @@ CONFIG_DOT_DIR=$HOME/dotfiles/config
 DOT_DIR=$HOME/dotfiles
 FONTS_DIR=$HOME/dotfiles/fonts
 UTILS_DIR=$HOME/dotfiles/utils
+BINFILES=/usr/local/bin
 
 install_extra_packages=1
 install_nvim=1
@@ -75,8 +76,8 @@ config_dirs_link() {
     i3 reload
 
     # Move BIN helpers
-    ln -s $UTILS_DIR/ord_version.sh $HOME/bin/ord_v
-    ln -s $UTILS_DIR/init_dev_env.sh $HOME/bin/ide
+    ln -s $UTILS_DIR/ord_version.sh $BINFILES/ord_v
+    ln -s $UTILS_DIR/init_dev_env.sh $BINFILES/ide
 }
 
 terminal() {

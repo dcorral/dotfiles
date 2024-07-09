@@ -120,6 +120,7 @@ assign [class="Microsoft"] $ws2
 assign [class="Notion"] $ws3
 assign [class="Spotify"] $ws5
 assign [class="Telegram"] $ws4
+assign [class="DigitalClock"] $ws9
 
 # Add this rule to the i3 config
 for_window [class="Microsoft-edge" instance="app.slack.com"] move to workspace 3

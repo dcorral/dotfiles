@@ -7,7 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export TERMINAL=alacritty
 export EDITOR=vim
 export DOTFILES="$HOME/dotfiles/"
-export BINFILES="$HOME/bin/"
+export BINFILES="/usr/local/bin/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -56,6 +56,5 @@ alias server='ssh server-online'
 autoload -U compinit
 compinit -i
 
-export PATH="$PATH:$HOME/.huff/bin"
-export PATH="$PATH:$BINFILES"
+export PATH="$HOME/.huff/bin:$PATH"
 
