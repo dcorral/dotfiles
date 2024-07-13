@@ -78,6 +78,7 @@ config_dirs_link() {
     # Move BIN helpers
     ln -s $UTILS_DIR/ord_version.sh $BINFILES/ord_v
     ln -s $UTILS_DIR/init_dev_env.sh $BINFILES/ide
+    ln -s $UTILS_DIR/clear_cache.sh $BINFILES/clear_cache
 }
 
 terminal() {
