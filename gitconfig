@@ -1,6 +1,7 @@
 [user]
 	email = hi@dcorral.com
 	name = dcorral
+	signingkey = FCD6E9680DB7A12A
 
 [core]
 	pager = delta
@@ -17,9 +18,11 @@
 
 [merge]
 	conflictstyle = diff3
+	tool = meld
 
 [diff]
 	colorMoved = default
+	tool = meld
 [init]
 	defaultBranch = main
 [branch]
@@ -32,8 +35,12 @@
 	repo = /home/dcorral/workspace/CV-SCs
 	repo = /home/dcorral/workspace/CV-frontend
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[pull]
+	rebase = false
