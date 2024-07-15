@@ -51,7 +51,7 @@ _nvm() {
 
 base_packages() {
     sudo pacman -Syy --noconfirm
-    sudo pacman -S bat fzf unzip viewnior scrot clang arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill git-delta --noconfirm
+    sudo pacman -S bat fzf unzip viewnior scrot clang arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill git-delta dunst --noconfirm
     _nvm
     _yay
     # Rust
@@ -69,6 +69,7 @@ config_dirs_link() {
     ln -s $src/alacritty $dst/alacritty
     ln -s $src/gtk-3.0 $dst/gtk-3.0
     ln -s $src/i3status $dst/i3status
+    ln -s $src/dunst $dst/dunst
     if [[ $install_nvim -eq 1 ]]; then
         ln -s $src/nvim $dst/nvim
     fi

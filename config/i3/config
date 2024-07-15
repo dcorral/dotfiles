@@ -1,17 +1,20 @@
 set $mod Mod4
 font pango:Robot 10
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id setxkbmap -layout us,es -option 'grp:alt_shift_toggle'
+exec --no-startup-id dunst
 exec --no-startup-id nm-applet
-exec --no-startup-id pa-applet
-# exec --no-startup-id "xkbcomp ~/.Xkeymap ':0'"
-set $refresh_i3status killall -SIGUSR1 i3status
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
 floating_modifier $mod
 tiling_drag modifier titlebar
+exec --no-startup-id pa-applet
+set $refresh_i3status killall -SIGUSR1 i3status
+
+bindsym $mod+Shift+t exec --no-startup-id k_layout
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 bindsym --release $mod+Shift+q exec --no-startup-id xkill

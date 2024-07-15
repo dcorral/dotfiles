@@ -7,6 +7,7 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+        output_format = i3bar
         colors = true
         interval = 5
 }
@@ -20,6 +21,8 @@ order += "load"
 order += "memory"
 order += "tztime local"
 order += "tztime sg"
+order += "read_file keyboard_layout"
+# order += "keyboard_layout"
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
@@ -56,4 +59,10 @@ tztime local {
 tztime sg {
     format = "%H:%M"
     timezone = "Asia/Singapore"
+}
+
+
+read_file keyboard_layout {
+    path = "/home/dcorral/keyboard_layout"
+    format = "%content"
 }
