@@ -51,6 +51,13 @@ alias prune-docker='docker image prune && docker image prune -a && docker contai
 alias f='forge'
 alias dc='docker-compose'
 alias server='ssh server-online'
+alias bc='bitcoin-cli'
+alias bd='bitcoind'
+alias bt='btc_toggle'
+alias ords='ord server --http-port 4040'
+alias ordw='ord wallet'
+alias ordt='ord_toggle'
+alias kill_mouse='killall -9 move_mouse'
 
 [[ -z "$TMUX" ]] && exec tmux
 

@@ -80,6 +80,7 @@ config_dirs_link() {
     ln -s $UTILS_DIR/ord_version.sh $BINFILES/ord_v
     ln -s $UTILS_DIR/init_dev_env.sh $BINFILES/ide
     ln -s $UTILS_DIR/clear_cache.sh $BINFILES/clear_cache
+    ln -s $UTILS_DIR/move_mouse.sh $BINFILES/move_mouse
 }
 
 terminal() {

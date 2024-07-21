@@ -44,3 +44,5 @@
 	program = gpg
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
