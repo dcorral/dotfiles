@@ -1,42 +1,7 @@
--- -- Set viewoptions to exclude curdir to prevent working directory issues
--- vim.cmd [[set viewoptions-=curdir]]
---
--- -- Fold Level Function
--- vim.cmd([[
--- function! FoldLevel(lnum)
---     return ( max([
---         \     indent(prevnonblank(a:lnum)),
---         \     indent(nextnonblank(a:lnum))
---         \ ]) / getbufvar('.', '&tabstop', 1) )
--- endfunction
--- ]])
---
--- -- Create augroup for remember_folds
--- local augroup = vim.api.nvim_create_augroup("remember_folds", { clear = true })
---
--- -- Auto save fold view after exiting a file
--- vim.api.nvim_create_autocmd({ "BufLeave", "BufWinLeave", "InsertLeave" }, {
---     group = augroup,
---     callback = function()
---         vim.cmd("silent! mkview")
---     end,
---     desc = "save fold view",
--- })
---
--- -- Auto load fold view after entering a file
--- vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufEnter", "FocusGained" }, {
---     group = augroup,
---     callback = function()
---         vim.cmd("silent! loadview")
---     end,
---     desc = "load fold view",
--- })
---
--- -- Set fold options
--- vim.opt.foldmethod = 'expr'
--- vim.opt.foldexpr = 'FoldLevel(v:lnum)'
--- vim.opt.foldlevelstart = 99
---
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = 'indent'
+vim.opt.foldenable = true
+
 -- Whitespaces
 vim.cmd([[
 augroup trailing_whitespace
