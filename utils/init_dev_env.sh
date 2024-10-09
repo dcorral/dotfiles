@@ -49,9 +49,9 @@ tmux select-layout -t $SESSION_NAME:infra tiled
 
 # Set the paths for the panes
 killall bitcoind
-tmux send-keys -t $SESSION_NAME:infra.1 'cd $HOME/.bitcoin/ && clear && bitcoind' C-m
+tmux send-keys -t $SESSION_NAME:infra.1 'cd $HOME/.bitcoin/ && clear && bitcoind'
 tmux send-keys -t $SESSION_NAME:infra.2 'cd $HOME/ordzaar/ord_dev && clear' C-m
-tmux send-keys -t $SESSION_NAME:infra.3 'cd $HOME/.local/share/ord/ && clear && ord server --http-port 4040' C-m
+tmux send-keys -t $SESSION_NAME:infra.3 'cd $HOME/.local/share/ord/ && clear && ord server --http-port 4040'
 tmux send-keys -t $SESSION_NAME:infra.4 'cd $HOME/ordzaar/ord_dev/ && clear' C-m
 
 # Focus the second pane
