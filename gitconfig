@@ -37,3 +37,5 @@
 	sshsign = true
 [commit]
 	sshsign = true
+[gpg "ssh"]
+	allowedSignersFile = /home/dcorral/.ssh/allowed_signers
