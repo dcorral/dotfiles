@@ -13,6 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     { 'ellisonleao/gruvbox.nvim',        priority = 1000 },
+    { 'christoomey/vim-tmux-navigator' },
+    { 'nvim-lua/plenary.nvim' },
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     {
         'nvim-telescope/telescope.nvim',
@@ -29,7 +31,7 @@ local plugins = {
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     -- Formatter
-    { 'stevearc/conform.nvim', event = { "BufReadPre", "BufNewFile" }},
+    { 'stevearc/conform.nvim',   event = { "BufReadPre", "BufNewFile" } },
     -- CPM
     {
         'hrsh7th/nvim-cmp',
@@ -62,8 +64,9 @@ local plugins = {
         opts = {},
     },
     {
-        'elihunter173/dirbuf.nvim',
-        opts = {},
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
     }
 }
 

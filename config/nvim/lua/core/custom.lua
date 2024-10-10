@@ -1,24 +1,6 @@
--- Folds
-vim.cmd([[
-function! FoldLevel(lnum)
-    return ( max([
-        \     indent(prevnonblank(a:lnum)),
-        \     indent(nextnonblank(a:lnum))
-        \ ]) / getbufvar('.', '&tabstop', 1) )
-endfunction
-]])
-
-vim.cmd([[
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent! loadview
-augroup END
-]])
-
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'FoldLevel(v:lnum)'
-vim.opt.foldlevelstart = 99
+vim.opt.foldlevel = 20
+vim.opt.foldmethod = 'indent'
+vim.opt.foldenable = true
 
 -- Whitespaces
 vim.cmd([[

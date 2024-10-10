@@ -1,5 +1,5 @@
 vim.keymap.set('n', '<Esc>', ':noh<CR>')
-vim.keymap.set("n", "<leader>pv", '<cmd>Dirbuf<CR>')
+vim.keymap.set("n", "-", ':Ex<CR>')
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v", "x" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -37,6 +37,7 @@ local function format()
         vim.lsp.buf.format({ async = true })
     end
 end
+vim.keymap.set('n', '<space>t', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>')
 -- Function to format using LSP or forge fmt for Solidity
 vim.keymap.set('n', '<space>f', format, opts)
 

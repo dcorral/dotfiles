@@ -7,25 +7,27 @@ CONFIG_DIR=$HOME/.config
 CONFIG_DOT_DIR=$HOME/dotfiles/config
 DOT_DIR=$HOME/dotfiles
 FONTS_DIR=$HOME/dotfiles/fonts
+UTILS_DIR=$HOME/dotfiles/utils
+BINFILES=/usr/local/bin
 
 install_extra_packages=1
 install_nvim=1
 while getopts ":en" opt; do
-  case ${opt} in
+    case ${opt} in
     e)
-       install_extra_packages=0
-       ;;
+        install_extra_packages=0
+        ;;
     n)
-       install_nvim=0
-       ;;
+        install_nvim=0
+        ;;
     \?)
-       echo "Invalid option: -$OPTARG" 1>&2
-       exit 1
-       ;;
-  esac
+        echo "Invalid option: -$OPTARG" 1>&2
+        exit 1
+        ;;
+    esac
 done
 
-_yay(){
+_yay() {
     pushd $HOME
     sudo pacman -S --needed base-devel
     git clone https://aur.archlinux.org/yay.git
@@ -38,7 +40,7 @@ _yay(){
     sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 }
 
-_nvm(){
+_nvm() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
     source $HOME/.bashrc
     export NVM_DIR="$HOME/.nvm"
@@ -48,12 +50,8 @@ _nvm(){
 }
 
 base_packages() {
-	sudo pacman -Syy --noconfirm
-	sudo pacman -S bat fzf unzip viewnior\
-        scrot clang arandr fd ripgrep zsh alacritty\
-        neovim tmux font-manager gnome-themes-extra pcmanfm\
-        pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill\
-        git-delta --noconfirm
+    sudo pacman -Syy --noconfirm
+    sudo pacman -S bat fzf unzip viewnior scrot clang arandr fd ripgrep zsh alacritty neovim tmux font-manager gnome-themes-extra pcmanfm pavucontrol bluez blueman bluez-utils pulseaudio-bluetooth xclip xorg-xkill git-delta dunst --noconfirm
     _nvm
     _yay
     # Rust
@@ -63,21 +61,29 @@ base_packages() {
 }
 
 config_dirs_link() {
-	local src=$CONFIG_DOT_DIR
-	local dst=$CONFIG_DIR
+    local src=$CONFIG_DOT_DIR
+    local dst=$CONFIG_DIR
     rm -fr $CONFIG_DIR
     mkdir $CONFIG_DIR
-	ln -s $src/i3 $dst/i3
-	ln -s $src/alacritty $dst/alacritty
-	ln -s $src/gtk-3.0 $dst/gtk-3.0
+    ln -s $src/i3 $dst/i3
+    ln -s $src/alacritty $dst/alacritty
+    ln -s $src/gtk-3.0 $dst/gtk-3.0
+    ln -s $src/i3status $dst/i3status
+    ln -s $src/dunst $dst/dunst
     if [[ $install_nvim -eq 1 ]]; then
         ln -s $src/nvim $dst/nvim
     fi
-	ln -s -f $src/i3-scrot.conf $dst/i3-scrot.conf
+    ln -s -f $src/i3-scrot.conf $dst/i3-scrot.conf
     i3 reload
+
+    # Move BIN helpers
+    ln -s $UTILS_DIR/ord_version.sh $BINFILES/ord_v
+    ln -s $UTILS_DIR/init_dev_env.sh $BINFILES/ide
+    ln -s $UTILS_DIR/clear_cache.sh $BINFILES/clear_cache
+    ln -s $UTILS_DIR/move_mouse.sh $BINFILES/move_mouse
 }
 
-terminal(){
+terminal() {
     # change shell
     sudo chsh -s $(which zsh) $(whoami)
     # Set gobal env variables
@@ -96,13 +102,13 @@ terminal(){
     ln -s -f $DOT_DIR/p10k.zsh $HOME/.p10k.zsh
 }
 
-fonts(){
+fonts() {
     font-manager -i $FONTS_DIR/*
     yay -S noto-fonts-emoji-apple --noconfirm
     i3 reload
 }
 
-extra_conf(){
+extra_conf() {
     ln -s -f $DOT_DIR/gtkrc-2.0 $HOME/.gtkrc-2.0
     # i3 lock service
     sudo ln -s -f $DOT_DIR/i3lock.service /etc/systemd/system/i3lock.service
@@ -120,16 +126,16 @@ extra_conf(){
     ln -s $DOT_DIR/utils/run_loop.sh /usr/local/bin/run_loop
 }
 
-extra_packages(){
+extra_packages() {
     yay -S microsoft-edge-stable-bin ledger-live-bin --noconfirm
     sudo pacman -S telegram-desktop bitwarden --noconfirm
 }
 
-main(){
-	base_packages
+main() {
+    base_packages
     fonts
-	config_dirs_link
-	terminal
+    config_dirs_link
+    terminal
     extra_conf
     if [[ $install_extra_packages -eq 1 ]]; then
         extra_packages
@@ -137,5 +143,3 @@ main(){
 }
 
 main
-
-

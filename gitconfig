@@ -3,6 +3,8 @@
 	name = dcorral
 	signingkey = /home/dcorral/.ssh/id_rsa.pub
 
+
+
 [core]
 	pager = delta
     editor = nvim
@@ -18,9 +20,11 @@
 
 [merge]
 	conflictstyle = diff3
+	tool = meld
 
 [diff]
 	colorMoved = default
+	tool = meld
 [init]
 	defaultBranch = main
 [branch]
@@ -39,3 +43,12 @@
 	sshsign = true
 [gpg "ssh"]
 	allowedSignersFile = /home/dcorral/.ssh/allowed_signers
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
+

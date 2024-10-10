@@ -3,10 +3,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
+export GPG_TTY=$TTY
 
 export TERMINAL=alacritty
 export EDITOR=vim
 export DOTFILES="$HOME/dotfiles/"
+export BINFILES="/usr/local/bin/"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -15,6 +17,7 @@ plugins=(
     fzf
     zsh-syntax-highlighting
     zsh-autosuggestions
+    rust
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -33,7 +36,7 @@ alias cd='z'
 eval "$(zoxide init zsh)"
 
 # pnpm
-export PNPM_HOME="/home/dcorral/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -41,20 +44,25 @@ esac
 # pnpm end
 
 export PATH="$HOME/.local/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval $(thefuck --alias)
 
 export BROWSER="/usr/bin/microsoft-edge-stable"
 
 alias prune-docker='docker image prune && docker image prune -a && docker container prune && docker volume prune'
 alias f='forge'
+alias dc='docker-compose'
+alias server='ssh server-online'
+alias bc='bitcoin-cli'
+alias bd='bitcoind'
+alias bt='btc_toggle'
+alias ords='ord server --http-port 4040'
+alias ordw='ord wallet'
+alias ordt='ord_toggle'
+alias kill_mouse='killall -9 move_mouse'
 
 [[ -z "$TMUX" ]] && exec tmux
 
 autoload -U compinit
 compinit -i
 
-export PATH="$PATH:/home/dcorral/.huff/bin"
+export PATH="$HOME/.huff/bin:$PATH"
 
