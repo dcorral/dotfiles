@@ -1,7 +1,7 @@
 [user]
 	email = hi@dcorral.com
 	name = dcorral
-	signingkey = /home/dcorral/.ssh/id_rsa.pub
+	signingkey = /home/dcorral/.ssh/id_rsa
 
 [core]
 	pager = delta
@@ -34,5 +34,6 @@
 	repo = /home/dcorral/workspace/CV-frontend
 [gpg]
 	format = ssh
+	sshsign = true
 [commit]
 	sshsign = true
