@@ -1,7 +1,9 @@
 [user]
 	email = hi@dcorral.com
 	name = dcorral
-	signingkey = FCD6E9680DB7A12A
+	signingkey = /home/dcorral/.ssh/id_rsa.pub
+
+
 
 [core]
 	pager = delta
@@ -34,15 +36,19 @@
 [maintenance]
 	repo = /home/dcorral/workspace/CV-SCs
 	repo = /home/dcorral/workspace/CV-frontend
+[gpg]
+	format = ssh
+	sshsign = true
+[commit]
+	sshsign = true
+[gpg "ssh"]
+	allowedSignersFile = /home/dcorral/.ssh/allowed_signers
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = !/usr/bin/gh auth git-credential
-[commit]
-	gpgsign = true
-[gpg]
-	program = gpg
 [pull]
 	rebase = false
 [push]
 	autoSetupRemote = true
+
