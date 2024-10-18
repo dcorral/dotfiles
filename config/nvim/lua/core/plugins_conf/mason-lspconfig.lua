@@ -15,7 +15,7 @@ require("mason-lspconfig").setup {
         "pyright",
         "solidity",
         "sqlls",
-        "ts_ls",
+        "tsserver",
         "yamlls",
         "cmake"
     },
