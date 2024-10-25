@@ -58,8 +58,13 @@ alias ords='ord server --http-port 4040'
 alias ordw='ord wallet'
 alias ordt='ord_toggle'
 alias kill_mouse='killall -9 move_mouse'
+alias invalidate='function _invalidate_block() { bitcoin-cli invalidateblock $(bitcoin-cli getblockhash $1); }; _invalidate_block'
+alias invalidate_dir='function _invalidate_block_dir() { bitcoin-cli -datadir=. invalidateblock $(bitcoin-cli -datadir=. getblockhash $1); }; _invalidate_block_dir'
+alias reconsider_dir='function _invalidate_block_dir() { bitcoin-cli -datadir=. reconsiderblock $(bitcoin-cli -datadir=. getblockhash $1); }; _invalidate_block_dir'
 
-[[ -z "$TMUX" ]] && exec tmux
+
+
+# [[ -z "$TMUX" ]] && exec tmux
 
 autoload -U compinit
 compinit -i

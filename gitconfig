@@ -3,8 +3,6 @@
 	name = dcorral
 	signingkey = /home/dcorral/.ssh/id_rsa.pub
 
-
-
 [core]
 	pager = delta
     editor = nvim
@@ -41,6 +39,7 @@
 	sshsign = true
 [commit]
 	sshsign = true
+	gpgSign = true
 [gpg "ssh"]
 	allowedSignersFile = /home/dcorral/.ssh/allowed_signers
 [credential "https://github.com"]

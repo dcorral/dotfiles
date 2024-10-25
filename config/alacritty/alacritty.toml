@@ -25,18 +25,22 @@ foreground = "#d4be98"
 [font]
 size = 11
 
+[font.offset]
+x = 0
+y = 0
+
 [font.bold]
-family = "MesloLGS NF"
+family = "terminal-font"
 style = "Bold"
 
 [font.bold_italic]
-family = "MesloLGS NF"
+family = "terminal-font"
 style = "Bold Italic"
 
 [font.italic]
-family = "MesloLGS NF"
+family = "terminal-font"
 style = "Italic"
 
 [font.normal]
-family = "MesloLGS NF"
+family = "terminal-font"
 style = "Regular"
