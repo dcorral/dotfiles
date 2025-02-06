@@ -1,4 +1,5 @@
 require("core.plugins_conf.color")
+require("core.plugins_conf.oil")
 require("core.plugins_conf.treesitter")
 require("core.plugins_conf.telescope")
 require("core.plugins_conf.undotree")
