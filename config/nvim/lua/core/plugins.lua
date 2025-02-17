@@ -74,7 +74,15 @@ local plugins = {
         ---@type oil.SetupOpts
         opts = {},
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    }
+    },
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "nvim-neotest/nvim-nio"
+        }
+    },
+    "rcarriga/nvim-dap-ui"
 }
 
 local opts = {}

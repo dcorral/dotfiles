@@ -27,5 +27,4 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.colorcolumn = "100"
-vim.opt.mouse = ""
-
+vim.opt.mouse = "a"

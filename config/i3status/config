@@ -21,6 +21,7 @@ order += "load"
 order += "memory"
 order += "tztime local"
 order += "tztime sg"
+order += "tztime us"
 order += "read_file keyboard_layout"
 # order += "keyboard_layout"
 
@@ -59,6 +60,11 @@ tztime local {
 tztime sg {
     format = "%H:%M"
     timezone = "Asia/Singapore"
+}
+
+tztime us {
+    format = "%H:%M"
+    timezone = "America/New_York"
 }
 
 
