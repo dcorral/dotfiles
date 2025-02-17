@@ -75,3 +75,4 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "setlocal shiftwidth=2 tabstop=2",
 })
 vim.api.nvim_set_keymap('n', 'gp', ':put +<CR>', { noremap = true, silent = true })
+vim.opt.fixendofline = false

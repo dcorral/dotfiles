@@ -3,19 +3,26 @@ local conform = require("conform")
 -- Initial setup
 conform.setup({
     formatters_by_ft = {
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
+        javascript = { "prettier-eslint" },
+        typescript = { "prettier-eslint" },
+        javascriptreact = { "prettier-eslint" },
+        typescriptreact = { "prettier-eslint" },
+        json = { "prettier" },
+        yaml = { "prettier" },
         svelte = { "prettier" },
         css = { "prettier" },
         html = { "prettier" },
-        json = { "prettier" },
-        yaml = { "prettier" },
         markdown = { "prettier" },
         graphql = { "prettier" },
         lua = { "stylua" },
         python = { "isort", "black" },
+    },
+    formatters = {
+        ["prettier-eslint"] = {
+            command = "prettier-eslint",
+            args = { "--stdin-filepath", "$FILENAME" },
+            stdin = true,
+        },
     },
 })
 
