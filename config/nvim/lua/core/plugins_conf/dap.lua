@@ -38,9 +38,17 @@ dap.configurations.javascript = {
     {
         type = "pwa-node",
         request = "launch",
-        name = "Launch file (pwa-node)",
+        name = "pwa FILE",
         program = "${file}",
         cwd = "${workspaceFolder}",
-        console = "integratedTerminal"
+    },
+    {
+        type = "pwa-node",
+        request = "launch",
+        name = "pws SERVER",
+        program = "${workspaceFolder}/server/index.js",
+        cwd = "${workspaceFolder}",
     },
 }
+
+require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = { "javascript", "typescript" } })
