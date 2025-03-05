@@ -20,9 +20,9 @@ vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle
 vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Debug: Step Over" })
 vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug: Step Into" })
 vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Debug: Step Out" })
-vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
+vim.keymap.set("n", "<leader>dk", dap.terminate, { desc = "Debug: Kill debugger" })
+vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "Debug: Open REPL" })
 vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Debug: Toggle UI" })
-
 
 dap.adapters["pwa-node"] = {
     type = "server",
@@ -34,21 +34,5 @@ dap.adapters["pwa-node"] = {
     },
 }
 
-dap.configurations.javascript = {
-    {
-        type = "pwa-node",
-        request = "launch",
-        name = "pwa FILE",
-        program = "${file}",
-        cwd = "${workspaceFolder}",
-    },
-    {
-        type = "pwa-node",
-        request = "launch",
-        name = "pws SERVER",
-        program = "${workspaceFolder}/server/index.js",
-        cwd = "${workspaceFolder}",
-    },
-}
 
 require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = { "javascript", "typescript" } })

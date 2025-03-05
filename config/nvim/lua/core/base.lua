@@ -28,3 +28,4 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.colorcolumn = "100"
 vim.opt.mouse = "a"
+vim.o.maxmempattern = 50000000
