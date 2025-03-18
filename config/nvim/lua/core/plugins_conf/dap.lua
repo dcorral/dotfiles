@@ -20,7 +20,7 @@ vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle
 vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Debug: Step Over" })
 vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug: Step Into" })
 vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Debug: Step Out" })
-vim.keymap.set("n", "<leader>dk", dap.terminate, { desc = "Debug: Kill debugger" })
+vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "Debug: Kill debugger" })
 vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "Debug: Open REPL" })
 vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Debug: Toggle UI" })
 

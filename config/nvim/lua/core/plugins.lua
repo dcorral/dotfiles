@@ -27,11 +27,11 @@ local plugins = {
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     -- LSP
-    { 'williamboman/mason.nvim', build = ':MasonUpdate' },
+    { 'williamboman/mason.nvim' },
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     -- Formatter
-    { 'stevearc/conform.nvim',   event = { "BufReadPre", "BufNewFile" } },
+    { 'stevearc/conform.nvim',  event = { "BufReadPre", "BufNewFile" } },
     -- CPM
     {
         'hrsh7th/nvim-cmp',
@@ -53,11 +53,15 @@ local plugins = {
         'stevearc/aerial.nvim',
         opts = {},
     },
+    -- install with yarn or npm
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
         ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
     },
     {
         'ggandor/leap.nvim',
